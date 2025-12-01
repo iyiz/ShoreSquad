@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShoreSquad - Rally your crew, track weather, and hit the next beach cleanup. Join the movement to clean beaches with friends and make eco-action fun and connected.">
+    <meta name="theme-color" content="#0066CC">
+    <title>ShoreSquad - Beach Cleanup Community</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-water"></i>
+                <span>ShoreSquad</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#events" class="nav-link" data-section="events">Events</a></li>
+                <li><a href="#create" class="nav-link" data-section="create">Create</a></li>
+                <li><a href="#community" class="nav-link" data-section="community">Community</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Rally Your Crew</h1>
+                    <p class="subtitle">Track weather, organize cleanups, and make ocean conservation social.</p>
+                    <div class="cta-group">
+                        <button class="btn btn-primary" id="exploreBtn">Explore Events</button>
+                        <button class="btn btn-secondary" id="createBtn">Create Event</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="wave-animation">
+                        <svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" class="wave wave1"></path>
+                            <path d="M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z" class="wave wave2"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="eventCount">0</h3>
+                    <p>Active Events</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="memberCount">0</h3>
+                    <p>Community Members</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="trashCount">0</h3>
+                    <p>Lbs Collected</p>
+                </div>
+            </section>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="section">
+            <div class="section-header">
+                <h2>Upcoming Cleanups</h2>
+                <div class="filter-controls">
+                    <input type="text" id="searchInput" class="search-box" placeholder="Search by location..." aria-label="Search events">
+                    <select id="weatherFilter" class="filter-select" aria-label="Filter by weather">
+                        <option value="">All Weather</option>
+                        <option value="sunny">Sunny</option>
+                        <option value="cloudy">Cloudy</option>
+                        <option value="rainy">Rainy</option>
+                    </select>
+                </div>
+            </div>
+            <div id="eventsList" class="events-grid">
+                <!-- Events will be dynamically populated here -->
+            </div>
+            <div id="emptyState" class="empty-state">
+                <i class="fas fa-calendar-check"></i>
+                <p>No events yet. Be the first to create one!</p>
+            </div>
+        </section>
+
+        <!-- Create Event Section -->
+        <section id="create" class="section">
+            <div class="section-header">
+                <h2>Organize a Cleanup</h2>
+            </div>
+            <form id="eventForm" class="event-form" novalidate>
+                <div class="form-group">
+                    <label for="eventName">Event Name *</label>
+                    <input type="text" id="eventName" required placeholder="e.g., Sunset Beach Cleanup">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Date *</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTime">Time *</label>
+                        <input type="time" id="eventTime" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventLocation">Beach/Location *</label>
+                    <input type="text" id="eventLocation" required placeholder="Enter beach name or address">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDescription">Description</label>
+                    <textarea id="eventDescription" placeholder="What should people bring? Any tips?" rows="4"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventCapacity">Max Participants</label>
+                        <input type="number" id="eventCapacity" min="5" max="500" placeholder="Leave blank for unlimited">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDifficulty">Difficulty Level</label>
+                        <select id="eventDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="challenging">Challenging</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Event</button>
+                <button type="reset" class="btn btn-tertiary">Clear Form</button>
+            </form>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="section">
+            <div class="section-header">
+                <h2>Join the Movement</h2>
+            </div>
+            <div class="community-content">
+                <div class="community-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Driven</h3>
+                    <p>Together, we're stronger. Join thousands organizing beach cleanups in their communities.</p>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-cloud-sun"></i>
+                    <h3>Weather Ready</h3>
+                    <p>Check real-time weather for your events. Plan smart, cleanup better.</p>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-map"></i>
+                    <h3>Map-Based Discovery</h3>
+                    <p>Explore nearby cleanups on an interactive map. Find events near you.</p>
+                </div>
+                <div class="community-card">
+                    <i class="fas fa-share-nodes"></i>
+                    <h3>Easy Sharing</h3>
+                    <p>Share events with your crew. Invite friends and grow the movement.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ShoreSquad. Building a cleaner coast, together.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/app.js" defer></script>
+</body>
+</html>

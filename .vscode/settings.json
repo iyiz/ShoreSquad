@@ -1,0 +1,11 @@
+{
+    "liveServer.settings.port": 5500,
+    "liveServer.settings.root": "/",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+    "liveServer.settings.NoneRootBasePreview": true,
+    "liveServer.settings.default": true,
+    "liveServer.settings.fullReload": false,
+    "liveServer.settings.waitOnSave": 0,
+    "liveServer.settings.showOnStatusbar": true
+}
