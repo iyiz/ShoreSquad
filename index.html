@@ -20,6 +20,7 @@
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
                 <li><a href="#events" class="nav-link" data-section="events">Events</a></li>
+                <li><a href="#weather" class="nav-link" data-section="weather">Weather</a></li>
                 <li><a href="#map" class="nav-link" data-section="map">Map</a></li>
                 <li><a href="#create" class="nav-link" data-section="create">Create</a></li>
                 <li><a href="#community" class="nav-link" data-section="community">Community</a></li>
@@ -93,6 +94,24 @@
             <div id="emptyState" class="empty-state">
                 <i class="fas fa-calendar-check"></i>
                 <p>No events yet. Be the first to create one!</p>
+            </div>
+        </section>
+
+        <!-- Weather Forecast Section -->
+        <section id="weather" class="section">
+            <div class="section-header">
+                <h2>4-Day Weather Forecast</h2>
+                <p class="weather-description">Singapore weather forecast to help you plan your cleanup events</p>
+            </div>
+            <div id="weatherContainer" class="weather-grid">
+                <div class="weather-loading">
+                    <div class="spinner"></div>
+                    <p>Loading weather forecast...</p>
+                </div>
+            </div>
+            <div id="weatherError" class="alert alert-error" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="weatherErrorText"></span>
             </div>
         </section>
 

@@ -56,6 +56,7 @@ function initializeApp() {
     renderDemoEvents();
     updateStats();
     setMinDateToToday();
+    fetchWeatherForecast();
 }
 
 // ============================================
@@ -368,6 +369,87 @@ function filterEvents() {
 }
 
 // ============================================
+// WEATHER FORECAST (NEA API)
+// ============================================
+
+async function fetchWeatherForecast() {
+    const weatherContainer = document.getElementById('weatherContainer');
+    const weatherError = document.getElementById('weatherError');
+    const weatherErrorText = document.getElementById('weatherErrorText');
+    
+    try {
+        const response = await fetch('https://api.data.gov.sg/v1/environment/4-day-weather-forecast');
+        
+        if (!response.ok) {
+            throw new Error(`API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        displayWeatherForecast(data, weatherContainer, weatherError);
+    } catch (error) {
+        console.error('Weather API Error:', error);
+        weatherError.style.display = 'flex';
+        weatherErrorText.textContent = `Unable to load weather forecast: ${error.message}. Please try again later.`;
+        weatherContainer.innerHTML = '';
+    }
+}
+
+function displayWeatherForecast(data, container, errorElement) {
+    errorElement.style.display = 'none';
+    
+    if (!data.items || data.items.length === 0) {
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No forecast data available</p>';
+        return;
+    }
+    
+    const forecast = data.items[0].forecasts;
+    
+    container.innerHTML = forecast.map((day, index) => 
+        createWeatherCardHTML(day, index)
+    ).join('');
+}
+
+function createWeatherCardHTML(day, index) {
+    const date = new Date(day.timestamp);
+    const dateStr = date.toLocaleDateString('en-SG', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric' 
+    });
+    
+    const weatherIcon = getWeatherIcon(day.forecast);
+    const tempLow = day.temperature.low;
+    const tempHigh = day.temperature.high;
+    const humidityLow = day.relative_humidity.low;
+    const humidityHigh = day.relative_humidity.high;
+    const windSpeedLow = day.wind.speed.low;
+    const windSpeedHigh = day.wind.speed.high;
+    const windDir = day.wind.direction;
+    
+    return `
+        <div class="weather-card">
+            <div class="weather-date">${dateStr}</div>
+            <div class="weather-icon">${weatherIcon}</div>
+            <div class="weather-condition">${escapeHTML(day.forecast)}</div>
+            <div class="weather-temps">
+                <div class="temp-item">
+                    <div class="temp-label">Low</div>
+                    <div class="temp-value">${tempLow}°C</div>
+                </div>
+                <div class="temp-item">
+                    <div class="temp-label">High</div>
+                    <div class="temp-value">${tempHigh}°C</div>
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="weather-details-row"><strong>Humidity:</strong> ${humidityLow}% - ${humidityHigh}%</div>
+                <div class="weather-details-row"><strong>Wind:</strong> ${windSpeedLow}-${windSpeedHigh} kt ${windDir}</div>
+            </div>
+        </div>
+    `;
+}
+
+// ============================================
 // STATS & DISPLAY
 // ============================================
 
@@ -403,12 +485,32 @@ function getRandomWeather() {
 }
 
 function getWeatherIcon(weather) {
-    const icons = {
+    const lowerWeather = (weather || '').toLowerCase();
+    
+    // NEA Weather Forecast icons - comprehensive mapping
+    if (lowerWeather.includes('thundery') || lowerWeather.includes('thunderstorm')) {
+        return '⛈️';
+    } else if (lowerWeather.includes('rain') || lowerWeather.includes('shower')) {
+        return '🌧️';
+    } else if (lowerWeather.includes('cloud') || lowerWeather.includes('overcast')) {
+        return '☁️';
+    } else if (lowerWeather.includes('partly')) {
+        return '⛅';
+    } else if (lowerWeather.includes('sunny') || lowerWeather.includes('clear')) {
+        return '☀️';
+    } else if (lowerWeather.includes('wind')) {
+        return '💨';
+    } else if (lowerWeather.includes('fog') || lowerWeather.includes('haze')) {
+        return '🌫️';
+    }
+    
+    // Fallback icons for demo events
+    const demoIcons = {
         sunny: '☀️',
         cloudy: '☁️',
         rainy: '🌧️',
     };
-    return icons[weather] || '🌤️';
+    return demoIcons[weather] || '🌤️';
 }
 
 function escapeHTML(text) {
