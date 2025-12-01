@@ -73,6 +73,12 @@ function setupEventListeners() {
     DOM.exploreBtn.addEventListener('click', () => navigateToSection('events'));
     DOM.createBtn.addEventListener('click', () => navigateToSection('create'));
 
+    // Map Section
+    const joinNextCleanupBtn = document.getElementById('joinNextCleanupBtn');
+    if (joinNextCleanupBtn) {
+        joinNextCleanupBtn.addEventListener('click', handleJoinNextCleanup);
+    }
+
     // Form
     DOM.eventForm.addEventListener('submit', handleFormSubmit);
 
@@ -323,6 +329,22 @@ function handleRemoveEvent(e) {
     saveEventsToStorage();
     filterEvents();
     showAlert('You left the event', 'success');
+}
+
+// ============================================
+// MAP SECTION HANDLING
+// ============================================
+
+function handleJoinNextCleanup() {
+    showAlert('You\'ve joined the Pasir Ris Beach Cleanup! 🌊 Check your email for more details.', 'success');
+    
+    // Optional: Track this action in localStorage
+    const pasirRisCleanupId = 'pasir-ris-cleanup-2025';
+    if (!AppState.currentUser.eventsJoined.includes(pasirRisCleanupId)) {
+        AppState.currentUser.eventsJoined.push(pasirRisCleanupId);
+        saveUserToStorage();
+        updateStats();
+    }
 }
 
 // ============================================
