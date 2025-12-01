@@ -41,6 +41,7 @@ Chosen to resonate with youth culture and environmental commitment:
 - **Mobile-First**: Designed for on-the-go user access
 - **Accessibility**: WCAG AA compliant color contrast, keyboard navigation
 - **Simplicity**: Clear CTAs and streamlined event creation (< 30 seconds)
+- **Metric-First**: All measurements use metric units (kilograms, kilometers, Celsius)
 - **Social Proof**: Display member counts, cleanup stats to encourage participation
 - **Geolocation-Aware**: Discover nearby events
 - **Offline-First**: Works without internet connection
@@ -72,7 +73,7 @@ Chosen to resonate with youth culture and environmental commitment:
 - Auto-dismissing alerts
 
 ### Future Enhancements
-- OpenWeatherMap API integration
+- OpenWeatherMap API integration (Celsius temperatures)
 - Leaflet.js interactive maps
 - QR code generation for event sharing
 - Service Worker for offline support

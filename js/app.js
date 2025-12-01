@@ -17,7 +17,7 @@ const AppState = {
     stats: {
         activeEvents: 0,
         members: 237, // Demo data
-        trashCollected: 1540, // Demo data in lbs
+        trashCollected: 698, // Demo data in kg
     },
 };
 
